@@ -4,20 +4,20 @@ export interface CounterProps {
     compiler: string;
     framework: string;
     version: number;
-    increment: () => any;
-    decrement: () => any;
+    onIncrement: () => any;
+    onDecrement: () => any;
 }
 
 export class Counter extends React.Component<CounterProps, {}> {
     render() {
-        const {compiler, framework, version, increment, decrement} = this.props;
+        const {compiler, framework, version, onIncrement, onDecrement} = this.props;
         return <div>
-            <h1>Hello from {compiler} and {framework} #{version}!</h1>
+            <h1>Counter based on {compiler} and {framework} # {version}!</h1>
             <p>
-                <button onClick={increment}>
+                <button onClick={onIncrement}>
                     +
                 </button>
-                <button onClick={decrement}>
+                <button onClick={onDecrement}>
                     -
                 </button>
             </p>
