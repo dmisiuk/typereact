@@ -1,37 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Store, createStore} from "redux";
-import {Hello} from "./components/Hello";
-
-interface Action<T> {
-    type: string;
-    payload: T;
-    error?: boolean;
-    meta?: any;
-}
+import {Counter} from "./components/Counter";
+import {count} from "./reducers/reducers";
 
 let devtools: any = window['devToolsExtension'] ? window['devToolsExtension']() : (f: any) => f;
-const store: Store<number> = devtools(createStore)(counter);
-
-function counter(state = 0, action: Action<number>) {
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + action.payload;
-        case 'DECREMENT':
-            return state - action.payload;
-        default:
-            return state
-    }
-}
+const store: Store<number> = devtools(createStore)(count);
 
 store.subscribe(() =>
     console.log(store.getState())
 );
 
-store.dispatch({type: 'INCREMENT', payload: 2});
-store.dispatch({type: 'INCREMENT', payload: 3});
-
-ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" version={store.getState()}/>,
+const render = () => ReactDOM.render(
+    <Counter compiler="TypeScript"
+             framework="React"
+             version={store.getState()}
+             increment={() => store.dispatch({type: 'INCREMENT', payload: 1})}
+             decrement={()=> store.dispatch({type: "DECREMENT", payload: 1})}/>,
     document.getElementById("example")
 );
+
+render();
+store.subscribe(render)

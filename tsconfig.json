@@ -8,7 +8,7 @@
         "jsx": "react"
     },
     "files": [
-        "./src/components/Hello.tsx",
+        "./src/components/Counter.tsx",
         "./src/index.tsx"
     ]
 }
