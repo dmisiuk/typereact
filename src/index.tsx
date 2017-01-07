@@ -11,7 +11,7 @@ interface Action<T> {
 }
 
 let devtools: any = window['devToolsExtension'] ? window['devToolsExtension']() : (f: any) => f;
-const store: Store<any> = devtools(createStore)(counter);
+const store: Store<number> = devtools(createStore)(counter);
 
 function counter(state = 0, action: Action<number>) {
     switch (action.type) {
@@ -31,8 +31,7 @@ store.subscribe(() =>
 store.dispatch({type: 'INCREMENT', payload: 2});
 store.dispatch({type: 'INCREMENT', payload: 3});
 
-
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" version="0.1"/>,
+    <Hello compiler="TypeScript" framework="React" version={store.getState()}/>,
     document.getElementById("example")
 );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Immutable from "immutable";
 
-export interface HelloProps { compiler: string; framework: string; version: string}
+export interface HelloProps { compiler: string; framework: string; version: number}
 
 const imVal = Immutable.fromJS({A: 1});
 
